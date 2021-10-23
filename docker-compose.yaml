@@ -1,0 +1,29 @@
+version: '3.3'
+services:
+  tor:
+    image: dperson/torproxy:latest
+    volumes:
+      - etc_tor:/etc/tor
+      - var_lib_tor:/var/lib/tor
+    ports:
+      - "9050:9050"
+    
+
+  lnd:
+    image: lightninglabs/lnd:v0.13.3-beta
+    volumes:
+      - ./root_volume/:/root/.lnd
+      - etc_tor:/etc/tor
+      - var_lib_tor:/var/lib/tor
+    ports:
+      - "9735:9735"
+      - "10009:10009"
+    depends_on:
+      - tor
+
+volumes:
+  etc_tor:
+    driver: local
+
+  var_lib_tor:
+    driver: local
