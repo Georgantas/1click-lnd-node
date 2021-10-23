@@ -1,7 +1,10 @@
-version: '3.3'
+version: '2.1'
 services:
   tor:
-    image: dperson/torproxy:latest
+    image: tor
+    container_name: tor
+    build:
+      context: tor/
     volumes:
       - etc_tor:/etc/tor
       - var_lib_tor:/var/lib/tor
@@ -19,7 +22,8 @@ services:
       - "9735:9735"
       - "10009:10009"
     depends_on:
-      - tor
+      tor:
+        condition: service_healthy
 
 volumes:
   etc_tor:
