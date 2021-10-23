@@ -5,6 +5,7 @@ services:
     container_name: tor
     build:
       context: tor/
+      dockerfile: Dockerfile
     volumes:
       - etc_tor:/etc/tor
       - var_lib_tor:/var/lib/tor
@@ -13,7 +14,11 @@ services:
     
 
   lnd:
-    image: lightninglabs/lnd:v0.13.3-beta
+    image: lnd
+    container_name: lnd
+    build:
+      context: lnd/
+      dockerfile: Dockerfile
     volumes:
       - ./root_volume/:/root/.lnd
       - etc_tor:/etc/tor
