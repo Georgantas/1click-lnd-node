@@ -30,6 +30,20 @@ services:
       tor:
         condition: service_healthy
 
+  thunderhub:
+    image: thunderhub
+    container_name: thunderhub
+    build:
+      context: thunderhub/
+      dockerfile: Dockerfile
+    volumes:
+      - ./root_volume:/root/.lnd
+    ports:
+      - "3000:3000"
+    depends_on:
+      tor:
+        condition: service_healthy
+
 volumes:
   etc_tor:
     driver: local

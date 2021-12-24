@@ -1,0 +1,8 @@
+masterPassword: password
+accounts:
+  - name: admin
+    serverUrl: lnd:10009
+    macaroonPath: /root/.lnd/data/chain/bitcoin/mainnet/admin.macaroon
+    certificatePath: /root/.lnd/tls.cert
+    password: password
+    network: mainnet
